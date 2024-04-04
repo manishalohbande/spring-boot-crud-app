@@ -1,0 +1,10 @@
+com\springcrud\SpringCrud\repository\CrudRepository.class
+com\springcrud\SpringCrud\ServletInitializer.class
+com\springcrud\SpringCrud\SpringCrudApplication.class
+com\springcrud\SpringCrud\controller\CrudController.class
+com\springcrud\SpringCrud\IncomingDto\ProductDto.class
+com\springcrud\SpringCrud\entity\Product.class
+com\springcrud\SpringCrud\service\CrudService.class
+com\springcrud\SpringCrud\service\CrudServiceImpl.class
+com\springcrud\SpringCrud\entity\BaseEntity.class
+com\springcrud\SpringCrud\entity\BaseIdentifierGenerator.class
