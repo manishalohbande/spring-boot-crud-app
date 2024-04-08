@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springcrud.SpringCrud.IncomingDto.ProductDto;
-import com.springcrud.SpringCrud.controller.CrudController;
 import com.springcrud.SpringCrud.entity.Product;
 import com.springcrud.SpringCrud.repository.CrudRepository;
+
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
+
 
 @Service
 public class CrudServiceImpl implements CrudService{
@@ -58,24 +61,35 @@ public class CrudServiceImpl implements CrudService{
 	public String updateProduct(ProductDto productDto) {
 		// TODO Auto-generated method stub
 		logger.info("In updateProduct");
-		if(productDto.getName()==null || productDto.getName().isBlank()) {
-			return "Error: Producut name Should not be blank";
-		}
+		
+		  if(productDto.getName()==null || productDto.getName().isBlank())
+		   return "Error: Producut name Should not be blank";
+		  
+		 
+	
 		Optional<Product> productifExists= crudRepository.findById(productDto.getId());
 	
 		if(!productifExists.isEmpty()) {
+			try {
         Product product =productifExists.get();		
 		product.setName(productDto.getName());
 		product.setDescription(productDto.getDescription());
 		product.setPrice(productDto.getPrice());
-	
+		
 		crudRepository.save(product);
 		
-		return "Scuccessfully Updated the product";
+		}
+		
+		catch(Exception  e) {
+			
+			return "Something went wrong please try again! " + e.getMessage();
+		}
+			return "Scuccessfully Updated the product";
 		}
 		else {
 			return "Product of given Id does not Exist!";
 		}
+		
 	}
 
 	@Override
